@@ -130,7 +130,7 @@ function loadProcessor(context, name, baseURL) {
             channelInterpretation: "speakers",
             processorOptions,
         };
-        const FaustAudioProcessorNode = FaustAudioProcessorNode_1.default();
+        const FaustAudioProcessorNode = (0, FaustAudioProcessorNode_1.default)();
         if (!FaustAudioProcessorNode) {
             console.error("Error loading FaustAudioProcessorNode: Web audio API isn't supported in this environment.");
             return null;

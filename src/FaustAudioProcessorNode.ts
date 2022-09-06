@@ -1,8 +1,6 @@
-import { AudioWorkletNode, IAudioContext } from "standardized-audio-context";
-
 export default function getClass() {
   if (typeof AudioWorkletNode !== "undefined") {
-    return class FaustAudioProcessorNode extends AudioWorkletNode<IAudioContext> {
+    return class FaustAudioProcessorNode extends AudioWorkletNode {
       public json: string;
       public json_object: Record<string, any>;
         parse_ui: (ui: any, obj: any) => void;
@@ -18,7 +16,7 @@ export default function getClass() {
         gui: any;
         presets: any;
 
-      constructor(context: IAudioContext, name: string, nodeOptions) {
+      constructor(context: AudioContext, name: string, nodeOptions) {
         super(context, name, nodeOptions);
 
         this.json = nodeOptions.processorOptions.json;
@@ -273,7 +271,7 @@ export default function getClass() {
        * @param value - the MIDI controller value (0..127)
        */
       ctrlChange(channel, ctrl, value) {
-        if (this.fCtrlLabel[ctrl] !== []) {
+        if (this.fCtrlLabel[ctrl].length > 0) {
           for (var i = 0; i < this.fCtrlLabel[ctrl].length; i++) {
             var path = this.fCtrlLabel[ctrl][i].path;
             this.setParamValue(

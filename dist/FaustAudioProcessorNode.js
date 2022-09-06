@@ -9,10 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const standardized_audio_context_1 = require("standardized-audio-context");
 function getClass() {
-    if (typeof standardized_audio_context_1.AudioWorkletNode !== "undefined") {
-        return class FaustAudioProcessorNode extends standardized_audio_context_1.AudioWorkletNode {
+    if (typeof AudioWorkletNode !== "undefined") {
+        return class FaustAudioProcessorNode extends AudioWorkletNode {
             constructor(context, name, nodeOptions) {
                 super(context, name, nodeOptions);
                 this.baseURL = "";
@@ -236,7 +235,7 @@ function getClass() {
              * @param value - the MIDI controller value (0..127)
              */
             ctrlChange(channel, ctrl, value) {
-                if (this.fCtrlLabel[ctrl] !== []) {
+                if (this.fCtrlLabel[ctrl].length > 0) {
                     for (var i = 0; i < this.fCtrlLabel[ctrl].length; i++) {
                         var path = this.fCtrlLabel[ctrl][i].path;
                         this.setParamValue(path, FaustAudioProcessorNode.remap(value, 0, 127, this.fCtrlLabel[ctrl][i].min, this.fCtrlLabel[ctrl][i].max));

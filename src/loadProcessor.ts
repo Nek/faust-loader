@@ -1,4 +1,3 @@
-import { IAudioContext } from "standardized-audio-context";
 import getClass from "./FaustAudioProcessorNode";
 
 function heap2Str(buf: Uint8Array) {
@@ -11,7 +10,7 @@ function heap2Str(buf: Uint8Array) {
 }
 
 const processorModules: Record<string, Promise<void>> = {};
-async function loadProcessorModule(context: IAudioContext, url: string) {
+async function loadProcessorModule(context: AudioContext, url: string) {
   if (!context.audioWorklet) {
     console.error(
       "Error loading FaustAudioProcessorNode: standardized-audio-context AudioWorklet isn't supported in this environment."
@@ -108,7 +107,7 @@ const importObject = {
 };
 
 export default async function loadProcessor(
-  context: IAudioContext,
+  context: AudioContext,
   name: string,
   baseURL: string
 ) {

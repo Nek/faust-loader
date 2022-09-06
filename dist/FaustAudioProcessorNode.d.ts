@@ -1,6 +1,5 @@
-import { IAudioContext } from "standardized-audio-context";
 export default function getClass(): {
-    new (context: IAudioContext, name: string, nodeOptions: any): {
+    new (context: AudioContext, name: string, nodeOptions: any): {
         json: string;
         json_object: Record<string, any>;
         parse_ui: (ui: any, obj: any) => void;
@@ -95,24 +94,28 @@ export default function getClass(): {
          * @param {Object} patch to assign as a preset to the node
          */
         setPatch(patch: any): void;
-        onprocessorerror: import("standardized-audio-context").TErrorEventHandler<any>;
-        readonly parameters: import("standardized-audio-context").TAudioParamMap;
+        onprocessorerror: (this: AudioWorkletNode, ev: Event) => any;
+        readonly parameters: AudioParamMap;
         readonly port: MessagePort;
+        addEventListener<K extends "processorerror">(type: K, listener: (this: AudioWorkletNode, ev: AudioWorkletNodeEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K_1 extends "processorerror">(type: K_1, listener: (this: AudioWorkletNode, ev: AudioWorkletNodeEventMap[K_1]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
         channelCount: number;
-        channelCountMode: import("standardized-audio-context").TChannelCountMode;
-        channelInterpretation: import("standardized-audio-context").TChannelInterpretation;
-        readonly context: IAudioContext;
+        channelCountMode: ChannelCountMode;
+        channelInterpretation: ChannelInterpretation;
+        readonly context: BaseAudioContext;
         readonly numberOfInputs: number;
         readonly numberOfOutputs: number;
-        connect<U extends import("standardized-audio-context").TContext, OtherEventMap extends Record<string, Event>, V extends import("standardized-audio-context").IAudioNode<U, OtherEventMap>>(destinationNode: V, output?: number, input?: number): V;
-        connect(destinationParam: import("standardized-audio-context").IAudioParam, output?: number): void;
-        disconnect(output?: number): void;
-        disconnect<U_1 extends import("standardized-audio-context").TContext, OtherEventMap_1 extends Record<string, Event>>(destinationNode: import("standardized-audio-context").IAudioNode<U_1, OtherEventMap_1>, output?: number, input?: number): void;
-        disconnect(destinationParam: import("standardized-audio-context").IAudioParam, output?: number): void;
-        addEventListener<Type extends string | number>(type: Type, listener: (this: any, event: import("standardized-audio-context").IAudioWorkletNodeEventMap[Type]) => void, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<Type_1 extends string | number>(type: Type_1, listener: (this: any, event: import("standardized-audio-context").IAudioWorkletNodeEventMap[Type_1]) => void, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, callback: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+        connect(destinationNode: AudioNode, output?: number, input?: number): AudioNode;
+        connect(destinationParam: AudioParam, output?: number): void;
+        disconnect(): void;
+        disconnect(output: number): void;
+        disconnect(destinationNode: AudioNode): void;
+        disconnect(destinationNode: AudioNode, output: number): void;
+        disconnect(destinationNode: AudioNode, output: number, input: number): void;
+        disconnect(destinationParam: AudioParam): void;
+        disconnect(destinationParam: AudioParam, output: number): void;
         dispatchEvent(event: Event): boolean;
     };
     remap(v: any, mn0: any, mx0: any, mn1: any, mx1: any): any;
