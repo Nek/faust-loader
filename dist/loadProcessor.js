@@ -130,20 +130,15 @@ function loadProcessor(context, name, baseURL) {
             channelInterpretation: "speakers",
             processorOptions,
         };
-        const FaustAudioProcessorNode = (0, FaustAudioProcessorNode_1.default)();
-        if (!FaustAudioProcessorNode) {
-            console.error("Error loading FaustAudioProcessorNode: Web audio API isn't supported in this environment.");
-            return null;
-        }
         try {
-            const node = new FaustAudioProcessorNode(context, name, nodeOptions);
+            const node = new FaustAudioProcessorNode_1.default(context, name, nodeOptions);
             node.onprocessorerror = () => {
                 console.log(`An error from ${name}-processor was detected.`);
             };
             return node;
         }
         catch (e) {
-            console.error("FaustAudioProcessorNode initialization failed: make sure you are passing a standardized-audio-context AudioContext.");
+            console.error("FaustAudioProcessorNode initialization failed.");
             console.error(e);
         }
     });

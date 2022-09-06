@@ -46,8 +46,6 @@ const faustLoader = function (content) {
         const wasmName = (0, loader_utils_1.interpolateName)(this, "[name].wasm", { context, content });
         const wasmPath = path_1.default.resolve(workDir.path, wasmName);
         const wasmContent = yield fs_extra_1.default.readFile(wasmPath);
-        // TODO: this method should accept a buffer
-        // PR: https://github.com/webpack/webpack/pull/13577
         this.emitFile(path_1.default.join(outputPath, wasmName), wasmContent);
         const processorName = (0, loader_utils_1.interpolateName)(this, "[name]-processor.js", {
             context,

@@ -1,4 +1,4 @@
-import getClass from "./FaustAudioProcessorNode";
+import FaustAudioProcessorNode from "./FaustAudioProcessorNode";
 
 function heap2Str(buf: Uint8Array) {
   let str = "";
@@ -135,14 +135,6 @@ export default async function loadProcessor(
     processorOptions,
   };
 
-  const FaustAudioProcessorNode = getClass();
-  if (!FaustAudioProcessorNode) {
-    console.error(
-      "Error loading FaustAudioProcessorNode: Web audio API isn't supported in this environment."
-    );
-    return null;
-  }
-
   try {
     const node = new FaustAudioProcessorNode(context, name, nodeOptions);
     node.onprocessorerror = () => {
@@ -152,7 +144,7 @@ export default async function loadProcessor(
     return node;
   } catch (e) {
     console.error(
-      "FaustAudioProcessorNode initialization failed: make sure you are passing a standardized-audio-context AudioContext."
+      "FaustAudioProcessorNode initialization failed."
     );
     console.error(e);
   }
