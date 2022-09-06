@@ -13,7 +13,7 @@ export default class FaustAudioProcessorNode extends AudioWorkletNode {
     baseURL: string;
     gui: any;
     presets: any;
-    constructor(context: AudioContext, name: string, nodeOptions: any);
+    constructor(context: BaseAudioContext, name: string, nodeOptions: any);
     handleMessage(event: any): void;
     /**
      * Destroy the node, deallocate resources.
