@@ -3,8 +3,20 @@ import { AudioWorkletNode, IAudioContext } from "standardized-audio-context";
 export default function getClass() {
   if (typeof AudioWorkletNode !== "undefined") {
     return class FaustAudioProcessorNode extends AudioWorkletNode<IAudioContext> {
-      private json: string;
-      private json_object: Record<string, any>;
+      public json: string;
+      public json_object: Record<string, any>;
+        parse_ui: (ui: any, obj: any) => void;
+        parse_group: (group: any, obj: any) => void;
+        parse_items: (items: any, obj: any) => void;
+        output_handler: any;
+        inputs_items: any[];
+        outputs_items: any[];
+        descriptor: any[];
+        fPitchwheelLabel: any[];
+        fCtrlLabel: any[];
+        baseURL: string = "";
+        gui: any;
+        presets: any;
 
       constructor(context: IAudioContext, name: string, nodeOptions) {
         super(context, name, nodeOptions);
@@ -31,7 +43,7 @@ export default function getClass() {
           }
         };
 
-        this.parse_item = function (item, obj) {
+        this.parse_items = function (item, obj) {
           if (
             item.type === "vgroup" ||
             item.type === "hgroup" ||
@@ -116,7 +128,7 @@ export default function getClass() {
         this.port.onmessage = this.handleMessage.bind(this);
         try {
           if (this.parameters)
-            this.parameters.forEach((p) => (p.automationRate = "k-rate"));
+            this.parameters.forEach((p) => ((p as AudioParam).automationRate = "k-rate"));
         } catch (e) {}
       }
 
@@ -320,7 +332,7 @@ export default function getClass() {
 
       // For WAP
       onMidi(data) {
-        midiMessage(data);
+        this.midiMessage(data);
       }
 
       /**

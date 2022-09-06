@@ -121,7 +121,7 @@ export default async function loadProcessor(
 
   const dspInstance = await WebAssembly.instantiate(dspModule, importObject);
 
-  const HEAPU8 = new Uint8Array(dspInstance.exports.memory.buffer);
+  const HEAPU8 = new Uint8Array((dspInstance.exports.memory as WebAssembly.Memory).buffer);
   const json = heap2Str(HEAPU8);
   const json_object = JSON.parse(json);
   const processorOptions = { wasm_module: dspModule, json: json };

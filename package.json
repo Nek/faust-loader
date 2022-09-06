@@ -9,7 +9,13 @@
     "serve": "webpack serve -c test/webpack.config.js",
     "test": "webpack build -c test/webpack.config.js"
   },
-  "keywords": ["webpack", "loader", "faust", "audio", "dsp"],
+  "keywords": [
+    "webpack",
+    "loader",
+    "faust",
+    "audio",
+    "dsp"
+  ],
   "author": "Mason Bourgeois",
   "license": "ISC",
   "description": "Webpack loader for Faust .dsp files",
