@@ -25,7 +25,7 @@ const processorModules = {};
 function loadProcessorModule(context, url) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!context.audioWorklet) {
-            console.error("Error loading FaustAudioProcessorNode: standardized-audio-context AudioWorklet isn't supported in this environment.");
+            console.error("Error loading FaustAudioProcessorNode: audio worklet isn't supported.");
             return null;
         }
         const existing = processorModules[url];

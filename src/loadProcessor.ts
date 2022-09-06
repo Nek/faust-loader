@@ -13,7 +13,7 @@ const processorModules: Record<string, Promise<void>> = {};
 async function loadProcessorModule(context: AudioContext, url: string) {
   if (!context.audioWorklet) {
     console.error(
-      "Error loading FaustAudioProcessorNode: standardized-audio-context AudioWorklet isn't supported in this environment."
+      "Error loading FaustAudioProcessorNode: audio worklet isn't supported."
     );
     return null;
   }

@@ -14,7 +14,7 @@ export default class FaustAudioProcessorNode extends AudioWorkletNode {
   gui: any;
   presets: any;
 
-  constructor(context: BaseAudioContext, name: string, nodeOptions) {
+  constructor(context: AudioContext, name: string, nodeOptions) {
     super(context, name, nodeOptions);
 
     this.json = nodeOptions.processorOptions.json;
